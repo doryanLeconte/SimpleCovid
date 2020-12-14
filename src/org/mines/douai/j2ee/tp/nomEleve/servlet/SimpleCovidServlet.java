@@ -39,6 +39,7 @@ public class SimpleCovidServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println("<html>");
 		out.println("<body>");
+		out.println("<h1>Super CovidTracker!</h1>");
 		out.println("<form action='http://localhost:8081/SimpleCovid/SimpleCovid' method=Post>");
 		out.println("<select name='pays' id='pays'>\r\n");
 		switch (this.selectedCountry) {

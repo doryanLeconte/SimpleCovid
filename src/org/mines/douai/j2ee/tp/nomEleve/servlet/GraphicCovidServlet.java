@@ -23,7 +23,7 @@ public class GraphicCovidServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final int WIDTH = 1000;
 	private static final int HEIGHT = 500;
-	private String selectedCountry = "France";
+	private String selectedCountry;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -40,18 +40,72 @@ public class GraphicCovidServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("image/png");
-		this.selectedCountry = request.getParameter("q");
+		if (request.getParameter("q") != null)
+			this.selectedCountry = request.getParameter("q");
+		else
+			this.selectedCountry = "";
 		BufferedImage bufferedImage = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g2d = bufferedImage.createGraphics();
 
-		// Draw on the image
-		g2d.setColor(Color.red);
-		for (int i = 0; i < NOMBRE_JOURS; i++) {
-			int abscisse = i * WIDTH / 30;
-			int ordonnee = HEIGHT - 2 - new Random().nextInt(HEIGHT);
-			g2d.fill(new Ellipse2D.Float(abscisse, ordonnee, 2.5f, 2.5f));
-		}
+		int allemagne = HEIGHT - NOMBRE_JOURS - new Random().nextInt(HEIGHT);
+		int france = HEIGHT - NOMBRE_JOURS - new Random().nextInt(HEIGHT);
+		int usa = HEIGHT - NOMBRE_JOURS - new Random().nextInt(HEIGHT);
 
+		// Draw on the image
+
+		switch (this.selectedCountry) {
+
+		case ("France"):
+			for (int i = 0; i < NOMBRE_JOURS; i++) {
+				g2d.setColor(Color.BLUE);
+				int abscisse = i * WIDTH / 30;
+				int fluctuation = new Random().nextInt(100) - 50;
+				int ordonnee = france + fluctuation;
+				g2d.fill(new Ellipse2D.Float(abscisse, ordonnee, WIDTH / NOMBRE_JOURS, WIDTH / NOMBRE_JOURS));
+			}
+			break;
+		case ("Allemagne"):
+			for (int i = 0; i < NOMBRE_JOURS; i++) {
+				g2d.setColor(Color.RED);
+				int abscisse = i * WIDTH / 30;
+				int fluctuation = new Random().nextInt(100) - 50;
+				int ordonnee = allemagne + fluctuation;
+				g2d.fill(new Ellipse2D.Float(abscisse, ordonnee, WIDTH / NOMBRE_JOURS, WIDTH / NOMBRE_JOURS));
+			}
+			break;
+		case ("USA"):
+			for (int i = 0; i < NOMBRE_JOURS; i++) {
+				g2d.setColor(Color.GREEN);
+				int abscisse = i * WIDTH / 30;
+				int fluctuation = new Random().nextInt(100) - 50;
+				int ordonnee = usa + fluctuation;
+				g2d.fill(new Ellipse2D.Float(abscisse, ordonnee, WIDTH / NOMBRE_JOURS, WIDTH / NOMBRE_JOURS));
+			}
+			break;
+		default:
+
+			for (int i = 0; i < NOMBRE_JOURS; i++) {
+				g2d.setColor(Color.RED);
+				int abscisse = i * WIDTH / 30;
+				int fluctuation = new Random().nextInt(100) - 50;
+				int ordonnee = allemagne + fluctuation;
+				g2d.fill(new Ellipse2D.Float(abscisse, ordonnee, WIDTH / NOMBRE_JOURS, WIDTH / NOMBRE_JOURS));
+			}
+			for (int i = 0; i < NOMBRE_JOURS; i++) {
+				g2d.setColor(Color.BLUE);
+				int abscisse = i * WIDTH / 30;
+				int fluctuation = new Random().nextInt(100) - 50;
+				int ordonnee = france + fluctuation;
+				g2d.fill(new Ellipse2D.Float(abscisse, ordonnee, WIDTH / NOMBRE_JOURS, WIDTH / NOMBRE_JOURS));
+			}
+			for (int i = 0; i < NOMBRE_JOURS; i++) {
+				g2d.setColor(Color.GREEN);
+				int abscisse = i * WIDTH / 30;
+				int fluctuation = new Random().nextInt(100) - 50;
+				int ordonnee = usa + fluctuation;
+				g2d.fill(new Ellipse2D.Float(abscisse, ordonnee, WIDTH / NOMBRE_JOURS, WIDTH / NOMBRE_JOURS));
+			}
+		}
 		ImageIO.write(bufferedImage, "png", response.getOutputStream());
 		g2d.dispose();
 

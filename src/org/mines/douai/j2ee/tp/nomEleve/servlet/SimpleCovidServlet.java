@@ -68,13 +68,16 @@ public class SimpleCovidServlet extends HttpServlet {
 
 		switch (this.selectedCountry) {
 		case "France":
-			out.println(this.FRANCE);
+			out.println("Nombre de cas du jour : " + this.FRANCE);
+			out.println("</br><img src=./GraphicCovid?q=France>");
 			break;
 		case "Allemagne":
-			out.println(this.ALLEMAGNE);
+			out.println("Nombre de cas du jour : " + this.ALLEMAGNE);
+			out.println("</br><img src=./GraphicCovid?q=Allemagne>");
 			break;
 		case "USA":
-			out.println(this.USA);
+			out.println("Nombre de cas du jour : " + this.USA);
+			out.println("</br><img src=./GraphicCovid?q=USA>");
 			break;
 
 		default:

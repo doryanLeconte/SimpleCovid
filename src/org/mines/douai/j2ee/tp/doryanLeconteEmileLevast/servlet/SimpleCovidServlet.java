@@ -1,4 +1,4 @@
-package org.mines.douai.j2ee.tp.nomEleve.servlet;
+package org.mines.douai.j2ee.tp.doryanLeconteEmileLevast.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
